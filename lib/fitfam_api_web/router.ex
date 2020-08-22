@@ -5,8 +5,13 @@ defmodule FitfamApiWeb.Router do
     plug :accepts, ["json"]
   end
 
-  scope "/api", FitfamApiWeb do
+  scope "/" do
     pipe_through :api
+
+    forward "/graphiql", Absinthe.Plug.GraphiQL,
+      schema: FitfamWeb.Schema,
+      interface: :simple,
+      context: %{pubsub: FitfamWeb.Endpoint}
   end
 
   # Enables LiveDashboard only for development
