@@ -15,4 +15,14 @@ defmodule FitfamWeb.Schema do
       resolve(&AccountsResolver.all_users/3)
     end
   end
+
+  mutation do
+    @desc "Create a new user"
+    field :create_user, :user do
+      arg(:name, non_null(:string))
+      arg(:email, non_null(:string))
+
+      resolve(&AccountsResolver.create_user/3)
+    end
+  end
 end
